@@ -43,8 +43,21 @@ export const calculateStats = (data: number[]): DescriptiveStats | null => {
     const min = ss.min(data);
     const max = ss.max(data);
     const range = max - min;
-    const skewness = ss.sampleSkewness(data);
-    const kurtosis = ss.sampleKurtosis(data);
+    // sampleSkewness requires at least 3 data points
+    let skewness = NaN;
+    try {
+        if (data.length >= 3) {
+            skewness = ss.sampleSkewness(data);
+        }
+    } catch (e) { console.warn('Skewness calc error', e); }
+
+    // sampleKurtosis requires at least 4 data points
+    let kurtosis = NaN;
+    try {
+        if (data.length >= 4) {
+            kurtosis = ss.sampleKurtosis(data);
+        }
+    } catch (e) { console.warn('Kurtosis calc error', e); }
 
     // Quantiles
     const q1 = ss.quantile(data, 0.25);

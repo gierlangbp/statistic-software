@@ -74,22 +74,27 @@ export const StatsDashboard = () => {
         return <div className="p-4 text-center text-gray-500">No data available for selected variables.</div>;
     }
 
+    const formatStat = (val: number) => {
+        if (isNaN(val)) return <span className="text-gray-400 text-xs">N/A</span>;
+        return val;
+    };
+
     const StatsRow = ({ group, variable, stats }: { group?: string, variable: string, stats: DescriptiveStats }) => (
         <tr className="hover:bg-gray-50/80 transition-colors">
             {group && <td className="px-6 py-4 font-medium text-gray-900">{group}</td>}
             <td className="px-6 py-4 font-medium text-gray-700">{variable}</td>
             <td className="px-6 py-4 text-right text-gray-600">{stats.n}</td>
-            <td className="px-6 py-4 text-right font-medium text-primary">{stats.mean}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.median}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.mode}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.stdDev}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.stdError}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.min}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.max}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.range}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.skewness}</td>
-            <td className="px-6 py-4 text-right text-gray-600">{stats.kurtosis}</td>
-            <td className="px-6 py-4 text-right text-gray-600">±{stats.confidenceLevel95}</td>
+            <td className="px-6 py-4 text-right font-medium text-primary">{formatStat(stats.mean)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.median)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.mode)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.stdDev)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.stdError)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.min)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.max)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.range)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.skewness)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">{formatStat(stats.kurtosis)}</td>
+            <td className="px-6 py-4 text-right text-gray-600">±{formatStat(stats.confidenceLevel95)}</td>
         </tr>
     );
 

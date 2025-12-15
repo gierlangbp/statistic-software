@@ -42,4 +42,28 @@ If you don't want to use Git commands:
 5. Follow Step 3 above.
 
 ## Note on Updates
-Whenever you change code and push to `main` branch, the GitHub Action will automatically rebuild and update your live site.
+To update your live site, run these commands in your terminal after making code changes:
+```bash
+git add .
+git commit -m "Description of changes"
+git push
+```
+The GitHub Action will automatically rebuild and update your live site in 1-3 minutes.
+
+## Troubleshooting
+
+### "Author identity unknown"
+If you see this error, run these commands in your terminal:
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+### "Updates were rejected" (Remote contains work)
+This happens if you initialized your GitHub repo with a README or License. To force your local code to be the main version, run:
+```bash
+git push -f origin main
+```
+*Warning: This overwrites the remote repository with your local version.*
+
+
